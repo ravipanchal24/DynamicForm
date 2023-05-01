@@ -7,12 +7,12 @@ const Form = () => {
       questionId: "rating01",
       answerOptions: null,
     },
-    // {
-    //   question: "How would you rate the driver attitude?",
-    //   questionType: "rating",
-    //   questionId: "rating02",
-    //   answerOptions: null,
-    // },
+    {
+      question: "How would you rate the driver attitude?",
+      questionType: "rating",
+      questionId: "rating02",
+      answerOptions: null,
+    },
     // {
     //   question: "How would you rate the ride hygiene and cleanliness?",
     //   questionType: "rating",
@@ -59,7 +59,7 @@ const Form = () => {
   ];
 
   const [textFeedbackAnswer, setTextFeedbackAnswer] = useState([]);
-  const [ratingFeedbackAnswer, setRatingFeedbackAnswer] = useState();
+  const [ratingFeedbackAnswer, setRatingFeedbackAnswer] = useState([]);
   const [singleSelectFeedbackAnswer, setSingleSelectFeedbackAnswer] = useState([]);
   const [multiSelectFeedbackAnswer, setMultiSelectFeedbackAnswer] = useState();
 
@@ -70,7 +70,7 @@ const Form = () => {
 
   const ratingOnChange = (input, questionId) => {
     console.log(input, questionId);
-    setRatingFeedbackAnswer({ [questionId]: input });
+    setRatingFeedbackAnswer([...ratingFeedbackAnswer, { [questionId]: input }]);
   };
 
   const singleSelectOnChange = (input, questionId) => {
@@ -96,43 +96,45 @@ const Form = () => {
                   <p>{question}</p>
                 </div>
                 <div style={{ display: "flex" }}>
-                  {[1, 2, 3, 4, 5].map((num, idx) => {
-                    return ratingFeedbackAnswer >= num ? (
-                      <div key={idx}>
-                        <input
-                          type="radio"
-                          id={num}
-                          value={num}
-                          name={question}
-                          style={{ display: "none" }}
-                          onChange={(e) => ratingOnChange(e.target.value, questionId)}
-                        ></input>
-                        <label htmlFor={num}>
-                          <i
-                            className="fa-solid fa-star fa-xl"
-                            style={{ color: "yellow", marginRight: "10px" }}
-                          />
-                        </label>
-                      </div>
-                    ) : (
-                      <div key={idx}>
-                        <input
-                          type="radio"
-                          id={num}
-                          value={num}
-                          name={question}
-                          style={{ display: "none" }}
-                          onChange={(e) => ratingOnChange(e.target.value)}
-                        ></input>
-                        <label htmlFor={num}>
-                          <i
-                            className="fa-regular fa-star fa-xl"
-                            style={{ color: "grey", marginRight: "10px" }}
-                          />
-                        </label>
-                      </div>
-                    );
-                  })}
+                  {[questionId, questionId, questionId, questionId, questionId].map(
+                    (quesId, idx) => {
+                      return ratingFeedbackAnswer[0] >= idx + 1 ? (
+                        <div key={idx}>
+                          <input
+                            type="radio"
+                            id={idx + 1}
+                            value={idx + 1}
+                            name={question} //keep name same for all radio buttons in same group to select only one at a time
+                            style={{ display: "none" }}
+                            onChange={(e) => ratingOnChange(e.target.value, quesId)}
+                          ></input>
+                          <label htmlFor={idx + 1}>
+                            <i
+                              className="fa-solid fa-star fa-xl"
+                              style={{ color: "yellow", marginRight: "10px" }}
+                            />
+                          </label>
+                        </div>
+                      ) : (
+                        <div key={idx}>
+                          <input
+                            type="radio"
+                            id={idx + 1}
+                            value={idx + 1}
+                            name={question}
+                            style={{ display: "none" }}
+                            onChange={(e) => ratingOnChange(e.target.value, quesId)}
+                          ></input>
+                          <label htmlFor={idx + 1}>
+                            <i
+                              className="fa-regular fa-star fa-xl"
+                              style={{ color: "grey", marginRight: "10px" }}
+                            />
+                          </label>
+                        </div>
+                      );
+                    }
+                  )}
                 </div>
               </div>
             );
