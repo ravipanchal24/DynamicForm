@@ -3,7 +3,6 @@ import './App.css';
 import About from "./components/About";
 import Contact from "./components/Contact";
 import Form from "./components/Form";
-import Form2 from "./components/Form2";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import PostData from './components/PostData';
 function App() {
@@ -25,8 +24,6 @@ function App() {
         }>
         </Route>
         <Route path="/form" exact element={<Form />}>
-        </Route>
-        <Route path="/form2" exact element={<Form2 />}>
         </Route>
       </Routes>
 
